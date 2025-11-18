@@ -1,574 +1,203 @@
-<!DOCTYPE html>
+          <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Àṣàkẹ́ Àdúràgbèmí</title>
+    <title>An Eternal Promise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- General Reset and Typography --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* Using a common sans-serif as fallback for better readability */
-            font-family: 'Georgia', serif, 'Times New Roman'; 
+        /* --- CSS (style.css content) --- */
+
+        :root {
+            --primary-color: #ff4d6d; /* Deep Rose Pink */
+            --text-color-light: #f0f0f0;
+            --background-dark: #000a12; /* Very dark navy/black */
         }
 
         body {
-            /* Using a custom property for color maintenance */
-            --primary-pink: #ff0066; 
-            --accent-purple: #8a2be2;
-            background: linear-gradient(135deg, #ff80ab 0%, #f4c2c2 50%, #ff66b3 100%);
+            margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
-            padding: 10px;
+            text-align: center;
+            background-color: var(--background-dark);
+            color: var(--text-color-light);
+            overflow: hidden; 
+            font-family: 'Playfair Display', serif;
         }
 
-        /* --- Main Content Container --- */
-        .container {
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.98);
-            /* Clamp ensures responsive padding */
-            padding: clamp(15px, 6vw, 40px);
-            padding-bottom: 50px;
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-            max-width: 600px;
-            width: 95%;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-            transition: transform 1s ease-out, box-shadow 0.6s ease;
-        }
-        
-        /* Added focus styles for accessibility (A11y) */
-        .container:focus-within {
-            box-shadow: 0 0 0 4px var(--accent-purple);
-        }
-        
-        /* Screen reader only class for accessibility announcements */
-        .sr-only {
+        /* --- Starry Night Background Animations --- */
+        .stars, .twinkling {
             position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none; 
+        }
+
+        .stars {
+            /* These URLs link to simple star patterns */
+            background: #000 url('http://www.script-tutorials.com/demos/360/images/stars.png') repeat top center;
+            z-index: 0;
+        }
+
+        .twinkling {
+            background: transparent url('http://www.script-tutorials.com/demos/360/images/twinkling.png') repeat top center;
+            z-index: 1;
+            animation: move-twink-back 200s linear infinite;
+        }
+
+        @keyframes move-twink-back {
+            from {background-position: 0 0;}
+            to {background-position: -10000px 5000px;}
+        }
+
+        /* --- Main Content Styling --- */
+        .love-container {
+            z-index: 10; 
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4); 
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(255, 77, 109, 0.5); 
         }
 
         h1 {
-            color: #c2185b;
-            margin-bottom: 5px;
-            font-size: clamp(1.4rem, 5vw, 2.5rem);
-            transition: opacity 0.5s;
-        }
-
-        h2 {
-            color: #673ab7;
-            font-size: clamp(1.2rem, 3.5vw, 2rem);
-            margin-bottom: 20px;
-            transition: opacity 0.5s;
-        }
-
-        .name {
-            color: var(--accent-purple);
-            font-style: italic;
-            font-weight: bold;
-            font-size: clamp(2.0rem, 7vw, 3rem);
-            margin: 15px 0 30px 0;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            animation: textWave 2s ease-in-out infinite alternate;
-            will-change: transform;
-        }
-
-        @keyframes textWave {
-            from { transform: scale(1); }
-            to { transform: scale(1.03); }
-        }
-
-        /* --- Buttons Section --- */
-        .buttons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            position: relative;
-            min-height: 60px;
-            transition: opacity 0.5s, transform 0.5s;
-            will-change: opacity, transform;
-        }
-
-        .buttons.hidden {
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-        }
-
-        button {
-            padding: 12px 20px;
-            font-size: clamp(1.0rem, 3vw, 1.3rem);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            z-index: 3;
-            will-change: transform, box-shadow;
-            outline: none; 
-        }
-        
-        button:focus {
-            box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--accent-purple);
-            transform: scale(1.05);
-        }
-
-        #yesBtn {
-            background-color: var(--primary-pink);
-            color: white;
-            box-shadow: 0 6px 20px rgba(255, 0, 102, 0.7);
-        }
-        
-        #noBtn {
-            background-color: #f0f0f0;
-            color: #333;
-            transition: all 0.2s ease, transform 0.05s linear; 
-        }
-        
-        /* Styles for the "No" button when it's moving (Desktop default) */
-        #noBtn.moving {
-            position: relative; /* Keep it relative for desktop positioning using translate3d */
-            transition: none; /* Disable transition when actively moving */
-        }
-        
-        /* --- Shake Animation --- */
-        .shake {
-            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-            transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            perspective: 1000px;
-        }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-
-        /* --- Message Box and Reveal Effect --- */
-        .hidden-message {
-            display: none;
-            margin-top: 30px;
-            padding: clamp(15px, 5vw, 25px);
-            background: linear-gradient(45deg, #ffafbd, #ffc3a0);
-            border-radius: 15px;
-            color: #5a2d82;
-            font-size: clamp(1.0rem, 3vw, 1.4rem);
-            line-height: 1.7;
-            text-align: left;
-            width: 100%;
-            opacity: 0;
-            transform: translate3d(0, 20px, 0);
-            transition: opacity 1.5s ease-in, transform 1.5s ease-in;
-            will-change: opacity, transform;
-        }
-
-        .hidden-message.message-fade-in {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
             opacity: 1;
-            transform: translate3d(0, 0, 0);
+            transition: opacity 2s ease-in-out;
         }
 
-        /* --- Confetti Styling and Animation --- */
-        .confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
+        p {
+            font-size: 1.2em;
+            margin-top: 0;
+            font-style: italic;
+            transition: opacity 1s ease-in-out;
         }
 
-        .confetti {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+        /* --- The Pulsing Heart --- */
+        .heart-pulse {
+            font-size: 4em;
+            cursor: pointer;
+            color: var(--primary-color);
+            margin: 30px auto;
+            animation: pulse 1.5s infinite ease-in-out;
+            display: inline-block;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .heart-pulse:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- Final Revealed Message --- */
+        #final-reveal {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5em;
+            color: #ffd700; /* Gold color for emphasis */
+            text-shadow: 0 0 10px var(--primary-color);
+            margin-top: 20px;
             opacity: 0;
-            animation: confetti 2s ease-out forwards;
-            will-change: transform, opacity;
+            transform: scale(0.5);
         }
 
-        @keyframes confetti {
-            0% {
-                transform: translate3d(0, 0, 0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translate3d(var(--x), var(--y), 0) rotate(720deg);
-                opacity: 0;
-            }
+        .show {
+            animation: dramatic-reveal 1.5s forwards;
         }
 
-        /* --- Heart Animation --- */
-        .hearts {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        @keyframes dramatic-reveal {
+            0% { opacity: 0; transform: scale(0.5); }
+            70% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        #signature {
+            font-size: 1.5em;
+            color: #ffcccc;
+            margin-top: 40px;
+            font-style: normal;
+        }
+
+        /* Utility Class for hiding/showing elements */
+        .hidden {
+            opacity: 0 !important;
+            max-height: 0;
+            overflow: hidden;
             pointer-events: none;
-            z-index: 1;
+            transition: opacity 1s, max-height 1s;
         }
 
-        .heart {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background-color: var(--primary-pink);
-            /* Standard heart shape */
-            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
-            opacity: 0.8;
-            will-change: transform, opacity;
-        }
-
-        /* --- Keyframes (Heart) --- */
-        @keyframes float {
-            0% {
-                transform: translate3d(var(--initial-x, 0), 0, 0) rotate(0deg) scale(1);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translate3d(var(--final-x, 0), -100vh, 0) rotate(360deg) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* --- Floating Text Animation (Unchanged) --- */
-        .floating-text {
-            position: absolute;
-            font-size: clamp(0.9rem, 3vw, 1.5rem);
-            color: #c2185b;
-            font-weight: bold;
-            opacity: 0;
-            z-index: 3;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
-            pointer-events: none;
-            will-change: transform, opacity;
-        }
-
-        @keyframes floatText {
-            0% { transform: translate3d(0, 0, 0); opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translate3d(0, -50vh, 0) scale(1.2); opacity: 0; }
-        }
-
-        /* --- Mobile Optimization: Media Queries --- */
-        @media (max-width: 500px) {
-            
-            /* 1. Adjust Body Padding/Container */
-            body {
-                padding: 5px; 
-            }
-
-            .container {
-                padding: 30px 15px; 
-                width: 100%; 
-            }
-
-            /* 2. Stack Buttons Vertically */
-            .buttons {
-                flex-direction: column; 
-                gap: 10px; 
-                min-height: 120px; /* Ensure enough height for the two buttons + movement */
-            }
-
-            button {
-                width: 100%; 
-                padding: 15px 20px; 
-                font-size: 1.1rem;
-            }
-            
-            /* Styles for the "No" button when it's moving (Mobile specific) */
-            #noBtn.moving {
-                position: absolute; /* Use absolute position for mobile stacking layout */
-                /* Use custom properties set by JS for top/left */
-                top: var(--no-y, 0); 
-                left: var(--no-x, 0);
-                /* Important: Overwrite desktop transform setting */
-                transform: none !important; 
-            }
+        .visible {
+            opacity: 1 !important;
+            max-height: 200px;
         }
     </style>
 </head>
 <body>
-    <div aria-live="polite" aria-atomic="true" id="ariaAnnouncement" class="sr-only"></div> 
 
-    <div class="hearts" id="heartsContainer"></div>
-    <div class="confetti-container" id="confettiContainer"></div>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
 
-    <div class="container" id="mainContainer" role="main">
-        <h1>No declarations today,</h1>
-        <h2>Will you marry me?</h2>
+    <div class="love-container">
+        <h1 id="main-message">To My Dearest Ayọ̀mídé</h1>
+        <p id="sub-message" class="visible">Click the heart to see my true feelings.</p>
+        
+        <div class="heart-pulse" onclick="revealMessage()">
+            <span>&#x2764;</span> </div>
 
-        <div class="name">Àṣàkẹ́ Àdúràgbèmí</div>
+        <h2 id="final-reveal" class="hidden">I LOVE YOU</h2>
 
-        <div class="buttons" id="buttonContainer">
-            <button id="yesBtn" aria-label="Yes, forever">Yes, forever</button>
-            <button id="noBtn" aria-label="No, never">No, never</button>
-        </div>
-
-        <div class="hidden-message" id="message">
-            <p>My dearest Àṣàkẹ́,</p>
-            <p>Your name itself is a prayer - "one who is carefully selected" and "Prayer Suits Me" - and indeed, you are the answered prayer I never knew I needed.</p>
-            <p>In your eyes, I see galaxies yet to be discovered. In your laughter, I hear melodies that soothe my soul. Your strength inspires me, your kindness humbles me, and your presence completes me.</p>
-            <p>You are the poetry my heart has been trying to write all my life.</p>
-            <p>With all my love,</p>
-            <p style="text-align: right; margin-top: 15px; font-weight: bold;">Your Oyebola baby</p>
-        </div>
+        <p id="signature" class="hidden">More than I can explain, I hope you give me a chance.</p>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const yesBtn = document.getElementById('yesBtn');
-            const noBtn = document.getElementById('noBtn');
-            const message = document.getElementById('message');
-            const heartsContainer = document.getElementById('heartsContainer');
-            const buttonContainer = document.getElementById('buttonContainer');
-            const confettiContainer = document.getElementById('confettiContainer');
-            const ariaAnnouncement = document.getElementById('ariaAnnouncement');
+        // --- JavaScript (script.js content) ---
+        
+        function revealMessage() {
+            const mainMessage = document.getElementById('main-message');
+            const subMessage = document.getElementById('sub-message');
+            const heart = document.querySelector('.heart-pulse');
+            const finalReveal = document.getElementById('final-reveal');
+            const signature = document.getElementById('signature');
+
+            // 1. Fade out the initial text
+            mainMessage.classList.add('hidden');
+            subMessage.classList.add('hidden');
             
-            let noMoveCount = 0;
-            const romanticTexts = [
-                "You're my everything! ❤️",
-                "I love you! 💍",
-                "Yours forever! ✨",
-                "My Destiny!"
-            ];
+            // 2. Stop the heart pulse
+            heart.style.animation = 'none';
+            heart.style.transform = 'scale(1)';
+            heart.style.cursor = 'default';
 
-            // --- Utility: Announce for Screen Readers (A11y) ---
-            function announce(msg) {
-                ariaAnnouncement.textContent = msg;
-            }
+            // Remove the click handler so it only runs once
+            heart.onclick = null;
 
-            // --- Confetti Function ---
-            function triggerConfetti() {
-                const colors = ['#ff0066', '#ffafbd', '#f4c2c2', '#8a2be2', '#ffffff'];
-                const count = 30;
+            // 3. Wait a moment (dramatic pause) and then reveal the final message
+            setTimeout(() => {
+                finalReveal.classList.remove('hidden');
+                finalReveal.classList.add('show');
                 
-                for (let i = 0; i < count; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.classList.add('confetti');
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.left = '50%';
-                    confetti.style.top = '50%';
-                    confetti.style.setProperty('--x', (Math.random() * 400 - 200) + 'px');
-                    confetti.style.setProperty('--y', (Math.random() * 400 - 400) + 'px');
-                    confettiContainer.appendChild(confetti);
-                    setTimeout(() => confetti.remove(), 2000);
-                }
-            }
-
-            // --- Heart Animation Functions ---
-            function createHeart() {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.style.left = Math.random() * 100 + 'vw';
-                
-                // Randomize horizontal drift for better visual effect
-                const initialXOffset = Math.random() * 20 - 10;
-                const finalXOffset = Math.random() * 100 - 50;
-                heart.style.setProperty('--initial-x', `${initialXOffset}px`);
-                heart.style.setProperty('--final-x', `${finalXOffset}px`);
-                
-                heart.style.animation = `float ${Math.random() * 2 + 4}s linear forwards ${Math.random() * 1}s`;
-                heartsContainer.appendChild(heart);
-
+                // 4. Reveal the signature text after the main reveal
                 setTimeout(() => {
-                    heart.remove();
-                }, 6000);
-            }
-
-            function createHeartsBurst(count, delayMultiplier = 80) {
-                for (let i = 0; i < count; i++) {
-                    setTimeout(createHeart, i * delayMultiplier);
-                }
-            }
-            
-            // --- Floating Text Functions ---
-            function createFloatingText(text) {
-                const floatingText = document.createElement('div');
-                floatingText.classList.add('floating-text');
-                floatingText.textContent = text;
-                floatingText.style.left = Math.random() * 80 + 10 + '%';
-                mainContainer.appendChild(floatingText);
-                floatingText.style.animation = `floatText 5s ease-out forwards`;
-
-                setTimeout(() => {
-                    floatingText.remove();
-                }, 5000);
-            }
-
-            // --- Dynamic No Button Movement ---
-            
-            function moveNoButton() {
-                if (buttonContainer.classList.contains('hidden') || noBtn.disabled) {
-                    return; 
-                }
-
-                const containerRect = buttonContainer.getBoundingClientRect();
-                const btnRect = noBtn.getBoundingClientRect();
+                    signature.classList.remove('hidden');
+                    signature.classList.add('visible');
+                }, 1200); // Wait for the main reveal animation to be almost done
                 
-                // Calculate max movement limits within the container
-                const maxX = containerRect.width - btnRect.width; 
-                const maxY = containerRect.height - btnRect.height;
-                
-                // Calculate new position
-                const newX = Math.random() * (maxX > 0 ? maxX : 10);
-                // Ensure Y-movement respects the position of the No button (which is often below the Yes button)
-                // Use btnRect.height as a rough offset to keep it in the lower half of the button container
-                const newY = Math.random() * (maxY > btnRect.height ? maxY - btnRect.height : 10) + (btnRect.height * 0.5); 
-
-                // Determine if we are on a stacked layout (mobile)
-                const isMobileLayout = window.innerWidth <= 500; 
-                
-                if (isMobileLayout) {
-                    // Mobile: use absolute positioning and CSS variables
-                    noBtn.style.setProperty('--no-x', `${newX}px`);
-                    noBtn.style.setProperty('--no-y', `${newY}px`);
-                } else {
-                    // Desktop: use relative translate3d
-                    noBtn.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
-                }
-                
-                noBtn.classList.add('moving');
-                noBtn.textContent = 'Wait!';
-                
-                noMoveCount++;
-                if (noMoveCount > 5) {
-                    yesBtn.textContent = 'Please, I need you!';
-                    yesBtn.style.transform = 'scale(1.1)';
-                    yesBtn.style.boxShadow = '0 0 30px #ff0066';
-                }
-            }
-
-            function resetNoButton() {
-                if (!noBtn.disabled && !buttonContainer.classList.contains('hidden')) {
-                    
-                    const isMobileLayout = window.innerWidth <= 500;
-                    
-                    if (isMobileLayout) {
-                        noBtn.style.removeProperty('--no-x');
-                        noBtn.style.removeProperty('--no-y');
-                    } else {
-                        noBtn.style.transform = ''; 
-                    }
-                    
-                    noBtn.classList.remove('moving');
-                    noBtn.textContent = 'No, never';
-                }
-            }
-            
-            // --- Event Handlers ---
-            
-            // Yes button functionality 
-            yesBtn.addEventListener('click', function() {
-                if (buttonContainer.classList.contains('hidden')) return;
-
-                triggerConfetti();
-                createHeartsBurst(40, 100);
-
-                buttonContainer.classList.add('hidden');
-                
-                announce("You chose yes! The hidden love message is now displayed."); 
-
-                message.style.display = 'block';
-
-                setTimeout(() => {
-                    message.classList.add('message-fade-in');
-                }, 50);
-
-                document.body.style.boxShadow = 'inset 0 0 50px rgba(255, 0, 102, 0.4)';
-
-                romanticTexts.forEach((text, index) => {
-                    setTimeout(() => {
-                        createFloatingText(text);
-                    }, index * 800);
-                });
-            });
-
-            // No button dramatic confirmation on click/tap
-            function handleNoClick() {
-                if (message.style.display === 'block') {
-                    return;
-                }
-                
-                announce("You attempted to choose No. A confirmation dialog appeared."); 
-
-                // We stop the movement immediately before the prompt appears
-                resetNoButton(); 
-
-                const confirmation = confirm("Really? Are you absolutely sure you want to say No to Oyebola's love?");
-
-                if (confirmation) {
-                    noBtn.classList.add('shake');
-                    noBtn.disabled = true;
-                    noBtn.textContent = "💔";
-                    yesBtn.textContent = "Please don't go";
-                    
-                    announce("You confirmed No. The No button is disabled.");
-
-                    setTimeout(() => {
-                        noBtn.classList.remove('shake');
-                    }, 1000);
-
-                } else {
-                    noBtn.classList.add('shake');
-                    noBtn.disabled = true;
-
-                    setTimeout(() => {
-                        noBtn.classList.remove('shake');
-                        noBtn.disabled = false;
-                        yesBtn.style.transform = 'scale(1.2)';
-                        yesBtn.style.boxShadow = '0 0 30px #ff0066';
-                        noMoveCount = 0; // Reset counter
-                        
-                        announce("You cancelled No. The Yes button is now emphasized.");
-                    }, 1000);
-                }
-            }
-            
-            // Mouse/Touch Events for the moving "No" button
-            noBtn.addEventListener('mouseenter', moveNoButton);
-            noBtn.addEventListener('mouseleave', resetNoButton);
-            
-            noBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault(); 
-                moveNoButton();
-            }); 
-            
-            noBtn.addEventListener('touchend', function() {
-                // On touchend, if the button has moved, reset its state.
-                if (noBtn.classList.contains('moving')) {
-                    resetNoButton(); 
-                }
-            });
-
-            // Final click logic
-            noBtn.addEventListener('click', handleNoClick);
-
-            // Initial and repeating heart animation
-            createHeartsBurst(10);
-            setInterval(() => createHeartsBurst(10), 10000);
-        });
+            }, 1000); // 1-second pause after fade-out
+        }
     </script>
 </body>
 </html>
